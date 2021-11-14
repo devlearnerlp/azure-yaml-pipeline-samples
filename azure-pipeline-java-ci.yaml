@@ -6,8 +6,11 @@
 trigger:
 - main
 
+
 pool:
   vmImage: ubuntu-latest
+
+
 
 steps:
 - task: Maven@3
@@ -22,3 +25,8 @@ steps:
    TargetFolder: $(Build.ArtifactStagingDirectory)
 - upload: $(Build.ArtifactStagingDirectory)
   artifact: drop
+- task: CopyPublishBuildArtifacts@1
+  displayName: 'Deployment'  
+  env:
+    name: linuxapp
+    resourceType: VirutalMachine
